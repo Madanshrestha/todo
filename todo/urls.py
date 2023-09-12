@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('base.urls')),
     re_path(r'accounts?/', include('account.urls')),
     path('api/user/', include('account.api.urls')),
+    path('api/', include('base.api.urls')),
 ]
