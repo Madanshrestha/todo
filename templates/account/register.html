@@ -5,13 +5,19 @@
     <h1>Register</h1>
 </div>
 <div class="card-body">
-    <form method="POST" action="">{% csrf_token %}
-        <label>{{ form.username.label }}</label>
-        {{ form.username }}
-        <label>{{ form.password1.label }}</label>
-        {{ form.password1 }}
+    <form method="POST" action="" enctype='multipart/form-data'>{% csrf_token %}
+        <label>{{ form.email.label }}</label>
+        {{ form.email }}
+        <label>{{ form.name.label }}</label>
+        {{ form.name }}
+        <label>{{ form.password.label }}</label>
+        {{ form.password }}
         <label>{{ form.password2.label }}</label>
         {{ form.password2 }}
+        <label>{{ form.tc.label }}</label>
+        {{ form.tc }}
+        <label>{{ form.profile_image.label }}</label>
+        {{ form.profile_image }}<br>
         <input style="margin-top: 10px;" class="button" type="submit" value="Submit">
     </form>
     <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>

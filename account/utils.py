@@ -1,7 +1,8 @@
 from django.core.mail import EmailMessage
-import environ
+from dotenv import load_dotenv
+import os
 
-env = environ.Env()
+load_dotenv()
 
 class Util:
     @staticmethod
@@ -9,7 +10,7 @@ class Util:
         email = EmailMessage(
             subject=data['email_subject'],
             body=data['email_body'],
-            from_email= env('EMAIL_FROM'),
+            from_email= os.getenv('EMAIL_FROM'),
             to=[data['to_email']]
         )
         email.send()

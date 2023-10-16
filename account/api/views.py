@@ -37,6 +37,8 @@ class UserRegistrationView(APIView):
     renderer_classes = [UserRenderer]
     def post(self, request, format=None,):
         serializer = UserRegistrationSerializer(data=request.data)
+        # if not serializer.is_valid(): # for error checking
+        #     print("GATTER", serializer.errors)
         if serializer.is_valid(raise_exception=True):
             user = serializer.save()
             token = get_token_for_user(user)
@@ -72,6 +74,7 @@ class UserProfileView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, format=None):
         serializer = UserProfileSerializer(request.user)
+        # print("gatling", serializer)
         return Response(serializer.data, status=status.HTTP_200_OK)
             
 

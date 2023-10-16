@@ -12,11 +12,12 @@ from .utils import Util
 class UserRegistrationSerializer(serializers.ModelSerializer):
     # We are using this because we need confirm password field in our registration request
     password2 = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+    profile_image = serializers.ImageField(required=False, max_length=None, allow_empty_file=True, use_url=True)
 
 
     class Meta:
         model = User
-        fields = ['email', 'name', 'password', 'password2', 'tc']
+        fields = ['email', 'name', 'password', 'password2', 'tc', 'profile_image']
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -33,7 +34,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         return data
     
     def create(self, validate_data):
-        print(validate_data)
         return User.objects.create_user(**validate_data)
     
 class UserLoginSerializer(serializers.ModelSerializer):
@@ -46,7 +46,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
 class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'name']
+        fields = ['id', 'email', 'name', 'profile_image']
 
 class UserChangePasswordSerializer(serializers.Serializer):
     password = serializers.CharField(max_length=255, style={"input_type": "password"}, write_only=True)
